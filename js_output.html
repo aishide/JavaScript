@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+	<title>JavaScript Output</title>
+</head>
+<body style="background-color:#fc9403;">
+
+<h1 style="color:#7d2011;"> JavaScript Output </h1>
+<br>
+<h3> innerHTML </h3>
+<p> Then use the innerHTML property to change the HTML content of the HTML element </p>
+example: <br>
+<p id="inner_html"> </p>
+
+<script>
+	document.getElementById("inner_html").innerHTML="Hence we implemented 	inner HTML!!";
+</script>
+
+<hr>
+<br>
+
+<h3> innerText </h3>
+<p>Then use the innerText property to change the inner text of the HTML element </p>
+Example: <br>
+<p id="inner_text"> </p>
+<script>
+	document.getElementById("inner_text").innerText="Hence we implemented innerText!!";
+</script>
+
+<hr>
+<br>
+
+<h3>documnet.write</h3>
+<p>For testing purposes, it is convenient to use document.write() </p>
+Example : <br>
+<script>
+document.write(5+5);
+document.write("Written by document.write");
+</script>
+<br><br>
+<button type="button" onclick="document.write(6+4)">  try documnet.write button </button>
+
+<hr>
+<br>
+<h3> window.alert </h3>
+<script>
+	window.alert("this is alert!!");
+</script>
+
+<hr>
+<br>
+<h3> Use of console.log()</h3>
+Example: <br>
+<p> go to consol log to see this output </p>
+<script>
+	console.log("kitttyyyy");
+	console.log(111);
+</script>
+
+<hr>
+<br>
+
+<h3>JS Print </h3>
+<p> The only exception is that you can call the window.print() method in the browser to print the content of the current window. </p>
+
+<button type="button" onclick="window.print()"> Print this page </button>
+
+
+</body>
+</html>
