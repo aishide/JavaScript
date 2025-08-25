@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grade Sheet</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0px 6px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 450px;
+    }
+    h2 {
+      margin-bottom: 5px;
+      color: #2c3e50;
+    }
+    h3 {
+      margin-top: 20px;
+      color: #4CAF50;
+      border-bottom: 2px solid #4CAF50;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 6px;
+      background: #4CAF50;
+      color: white;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      display: none;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background: #f2f2f2;
+    }
+    .fail {
+      background: #ffdddd;
+      color: #d8000c;
+    }
+    .pass {
+      background: #ddffdd;
+      color: #4F8A10;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Grade & CGPA Calculator</h2>
+  <p style="color:red; font-weight:bold;">Aishi De</p>
+
+  <p>Enter Marks for Each Subject:</p>
+  <input type="number" id="sub1" placeholder="Subject 1"><br>
+  <input type="number" id="sub2" placeholder="Subject 2"><br>
+  <input type="number" id="sub3" placeholder="Subject 3"><br>
+  <input type="number" id="sub4" placeholder="Subject 4"><br>
+  <input type="number" id="sub5" placeholder="Subject 5"><br>
+
+  <button onclick="calculate()">Generate Grade Sheet</button>
+
+  <h3 id="gradeSheetHeading" style="display:none;">📄 Grade Sheet</h3>
+
+  <table id="resultTable">
+    <thead>
+      <tr>
+        <th>Subject</th>
+        <th>Marks</th>
+        <th>Grade</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+    <tfoot>
+      <tr>
+        <th>Total</th>
+        <td id="total"></td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <th>Average</th>
+        <td id="average"></td>
+        <td id="overallGrade"></td>
+      </tr>
+      <tr>
+        <th>CGPA (0–10)</th>
+        <td id="cgpa" colspan="2"></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<script>
+function getGrade(marks) {
+    if (marks >= 50 && marks <= 65) return "C";
+    else if (marks >= 66 && marks <= 80) return "B";
+    else if (marks >= 81 && marks <= 90) return "A";
+    else if (marks > 90) return "A+";
+    else return "Fail";
+}
+
+function calculate() {
+    let marks = [
+      parseFloat(document.getElementById("sub1").value) || 0,
+      parseFloat(document.getElementById("sub2").value) || 0,
+      parseFloat(document.getElementById("sub3").value) || 0,
+      parseFloat(document.getElementById("sub4").value) || 0,
+      parseFloat(document.getElementById("sub5").value) || 0
+    ];
+
+    let total = marks.reduce((a, b) => a + b, 0);
+    let avg = total / marks.length;
+    let cgpa = avg / 9.5;
+    if (cgpa > 10) cgpa = 10; // cap at 10
+    if (cgpa < 0) cgpa = 0;   // floor at 0
+    let overallGrade = getGrade(avg);
+
+    // Fill table
+    let tableBody = document.getElementById("tableBody");
+    tableBody.innerHTML = "";
+    marks.forEach((mark, i) => {
+        let grade = getGrade(mark);
+        let row = `<tr>
+            <td>Subject ${i+1}</td>
+            <td>${mark}</td>
+            <td>${grade}</td>
+        </tr>`;
+        tableBody.innerHTML += row;
+    });
+
+    document.getElementById("total").textContent = total;
+    document.getElementById("average").textContent = avg.toFixed(2);
+    document.getElementById("overallGrade").textContent = overallGrade;
+    document.getElementById("cgpa").textContent = cgpa.toFixed(2) + "";
+
+    // Show heading + table
+    document.getElementById("gradeSheetHeading").style.display = "block";
+    let table = document.getElementById("resultTable");
+    table.style.display = "table";
+
+    // Pass/Fail coloring
+    table.className = (overallGrade === "Fail") ? "fail" : "pass";
+}
+</script>
+
+</body>
+</html>
