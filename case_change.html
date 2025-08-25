@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Case Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color:#ffba66;
+    }
+    textarea {
+      width: 100%;
+      height: 120px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      padding: 10px;
+    }
+    .btn-container {
+      display: flex;
+      justify-content: center; /* centers horizontally */
+      gap: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align: center;">Text Case Converter</h2>
+  
+<p style="text-align:right";> - Aishi De </p>
+<br>
+<br><br>
+  <textarea id="textInput" placeholder="Type or paste your text here..."></textarea>
+  
+  <div class="btn-container">
+    <button onclick="toUpperCaseText()">Convert to UPPERCASE</button>
+    <button onclick="toLowerCaseText()">Convert to lowercase</button>
+  </div>
+  
+  <script>
+    function toUpperCaseText() {
+      const input = document.getElementById("textInput");
+      input.value = input.value.toUpperCase();
+    }
+
+    function toLowerCaseText() {
+      const input = document.getElementById("textInput");
+      input.value = input.value.toLowerCase();
+    }
+  </script>
+</body>
+</html>
